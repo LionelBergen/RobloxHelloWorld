@@ -462,18 +462,18 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-38.3241539</X>
-					<Y>44.1957359</Y>
-					<Z>-22.3509102</Z>
-					<R00>-0.744770885</R00>
-					<R01>0.453770369</R01>
-					<R02>-0.489294201</R02>
-					<R10>1.49011612e-08</R10>
-					<R11>0.733222485</R11>
-					<R12>0.679988921</R12>
-					<R20>0.667320251</R20>
-					<R21>0.506435931</R21>
-					<R22>-0.546082735</R22>
+					<X>-45.2544174</X>
+					<Y>42.9378967</Y>
+					<Z>-40.77211</Z>
+					<R00>-0.772061825</R00>
+					<R01>0.348405719</R01>
+					<R02>-0.531539261</R02>
+					<R10>-0</R10>
+					<R11>0.836348653</R11>
+					<R12>0.548197806</R12>
+					<R20>0.635547459</R20>
+					<R21>0.423242599</R21>
+					<R22>-0.645712852</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -482,9 +482,9 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>-28.3425446</X>
-					<Y>30.3239517</Y>
-					<Z>-11.2108135</Z>
+					<X>-34.4109688</X>
+					<Y>31.754612</Y>
+					<Z>-27.5995102</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -1385,7 +1385,7 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 				<bool name="Disabled">false</bool>
 				<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">Script</string>
+				<string name="Name">HelloWorld</string>
 				<token name="RunContext">0</token>
 				<string name="ScriptGuid">{2D6C944B-A53D-4DEC-80BE-64341E48B904}</string>
 				<ProtectedString name="Source"><![CDATA[print("Hello world!")

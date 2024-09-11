@@ -462,18 +462,18 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-2.2895937</X>
-					<Y>38.3013191</Y>
-					<Z>31.1926308</Z>
-					<R00>0.989942193</R00>
-					<R01>0.0754989833</R01>
-					<R02>-0.119642951</R02>
-					<R10>-0</R10>
-					<R11>0.84569639</R11>
-					<R12>0.533664584</R12>
-					<R20>0.141472727</R20>
-					<R21>-0.528297067</R21>
-					<R22>0.837190449</R22>
+					<X>-40.5938416</X>
+					<Y>54.2734833</Y>
+					<Z>40.7735901</Z>
+					<R00>0.846804142</R00>
+					<R01>0.440733254</R01>
+					<R02>-0.297786713</R02>
+					<R10>-1.49011612e-08</R10>
+					<R11>0.559849679</R11>
+					<R12>0.828594208</R12>
+					<R20>0.531904817</R20>
+					<R21>-0.701656997</R21>
+					<R22>0.474083036</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -482,9 +482,9 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>6.66222858</X>
-					<Y>-1.62807465</Y>
-					<Z>-31.4469147</Z>
+					<X>-18.3128014</X>
+					<Y>-7.72371101</Y>
+					<Z>5.30168343</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -508,7 +508,7 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 		<Item class="MeshPart" referent="RBXA28D30D0DBA14E4CB1C3C37F1AA15575">
 			<Properties>
 				<SharedString name="AeroMeshData">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString>
-				<bool name="Anchored">false</bool>
+				<bool name="Anchored">true</bool>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<float name="BackParamA">-0.5</float>
 				<float name="BackParamB">0.5</float>
@@ -532,7 +532,7 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 					<R21>0</R21>
 					<R22>1</R22>
 				</CoordinateFrame>
-				<bool name="CanCollide">true</bool>
+				<bool name="CanCollide">false</bool>
 				<bool name="CanQuery">true</bool>
 				<bool name="CanTouch">true</bool>
 				<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
@@ -573,7 +573,7 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 				<token name="Material">256</token>
 				<string name="MaterialVariantSerialized"></string>
 				<Content name="MeshId"><url>rbxassetid://2431703579</url></Content>
-				<string name="Name">Circle</string>
+				<string name="Name">BronzeOrb</string>
 				<SharedString name="PhysicalConfigData">RV6xPAuvEKd1vlEpxLtcFw==</SharedString>
 				<BinaryString name="PhysicsData"></BinaryString>
 				<CoordinateFrame name="PivotOffset">
@@ -2308,6 +2308,16 @@ function CurrencyHandler.getCurrencyKeys()
 	return currency:new().values
 end
 
+function CurrencyHandler.addCurrencyToPlayer(player, currency)
+	local currency = currency or CurrencyHandler:createNewForPlayer()
+	for k, v in pairs(currency.values) do
+		local currencyValue = Instance.new("NumberValue", player)
+		currencyValue.Name = k
+		currencyValue.Value = v
+		print('Added ' .. k .. ':' .. v .. ' to player: ' .. player.Name)
+	end
+end
+
 return CurrencyHandler
 ]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
@@ -2343,38 +2353,33 @@ return CurrencyHandler
 				<ProtectedString name="Source"><![CDATA[local Currency = require(game.ReplicatedStorage.currency.Currency)
 local CurrencyHandler = require(game.ReplicatedStorage.currency.CurrencyHandler)
 
-function addCurrencyToPlayer(player)
-	local currency = CurrencyHandler:createNewForPlayer()
-	print(currency.values)
-	for k, v in pairs(currency.values) do
-		-- player:SetAttribute(k, v)
-		local currencyValue = Instance.new("NumberValue", player)
-		currencyValue.Name = k
-		currencyValue.Value = v
-		print('Added ' .. k .. ':' .. v .. ' to player: ' .. player.Name)
-	end
-end
-
 function playerAdded(player)
-	addCurrencyToPlayer(player)
+	CurrencyHandler.addCurrencyToPlayer(player)
 end
 
-game.Players.PlayerAdded:Connect(playerAdded)
-
-local part = workspace.Circle
-
-part.Touched:Connect(function(otherPart)
+function partCollision(part, otherPart)
 	local characterModel = otherPart:FindFirstAncestorOfClass("Model")
 	if characterModel then
-		part:PivotTo(CFrame.new(100, 0, -23))
-		
 		local player = game.Players:GetPlayerFromCharacter(characterModel)
-		if player then
+		if player and not part.TouchedRecently.Value then
+			part:PivotTo(CFrame.new(100, 0, -23))
 			player.Bronze.Value = player.Bronze.Value + 1
+			part.TouchedRecently.Value = true
 		end
 	end
+end
+
+
+local part = workspace.BronzeOrb
+local touchedRecentlyValue = Instance.new("BoolValue", part)
+touchedRecentlyValue.Name = 'TouchedRecently'
+touchedRecentlyValue.Value = false
+
+part.Touched:Connect(function (otherPart)
+	partCollision(part, otherPart)
 end)
-]]></ProtectedString>
+
+game.Players.PlayerAdded:Connect(playerAdded)]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0df4e162b34d89c106f246c80000c4c7</UniqueId>

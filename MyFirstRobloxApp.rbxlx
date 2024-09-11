@@ -462,18 +462,18 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-2.81741285</X>
-					<Y>80.5062332</Y>
-					<Z>21.9063721</Z>
-					<R00>0.539779961</R00>
-					<R01>0.797837853</R01>
-					<R02>-0.268500298</R02>
-					<R10>-0</R10>
-					<R11>0.318957388</R11>
-					<R12>0.947769046</R12>
-					<R20>0.841806173</R20>
-					<R21>-0.511586726</R21>
-					<R22>0.172166809</R22>
+					<X>-6.69947767</X>
+					<Y>81.0035477</Y>
+					<Z>21.3063126</Z>
+					<R00>0.994282842</R00>
+					<R01>0.1022214</R01>
+					<R02>-0.0308622904</R02>
+					<R10>-1.86264515e-09</R10>
+					<R11>0.289030373</R11>
+					<R12>0.957319915</R12>
+					<R20>0.106778726</R20>
+					<R21>-0.951846778</R21>
+					<R22>0.287377924</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -482,9 +482,9 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>-2.2804122</X>
-					<Y>78.6106949</Y>
-					<Z>21.5620384</Z>
+					<X>-6.63775301</X>
+					<Y>79.0889053</Y>
+					<Z>20.7315559</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -1256,22 +1256,20 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 						<bool name="Disabled">false</bool>
 						<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 						<Content name="LinkedSource"><null></null></Content>
-						<string name="Name">LocalScript</string>
+						<string name="Name">SetCurrencyDisplayScript</string>
 						<token name="RunContext">0</token>
 						<string name="ScriptGuid">{9BF8C5E2-3EC0-4C85-92C0-BBEAAD816555}</string>
-						<ProtectedString name="Source"><![CDATA[local player = game.Players.LocalPlayer
+						<ProtectedString name="Source"><![CDATA[local currencyHandler = require(game.ReplicatedStorage.currency.CurrencyHandler)
+local player = game.Players.LocalPlayer
 
-player:WaitForChild("gold").Changed:Connect(function(value)
-	script.Parent.GoldMedalImage.CurrencyLabel.Text = tostring(value)
-end)
+local currencyValues = currencyHandler.getCurrencyKeys()
 
-player:WaitForChild("bronze").Changed:Connect(function(value)
-	script.Parent.BronzeMedalImage.CurrencyLabel.Text = tostring(value)
-end)
-
-player:WaitForChild("silver").Changed:Connect(function(value)
-	script.Parent.SilverMedalImage.CurrencyLabel.Text = tostring(value)
-end)]]></ProtectedString>
+for k, _ in pairs(currencyValues) do
+	player:WaitForChild(k).Changed:Connect(function(value)
+		script.Parent[k .. 'MedalImage'].CurrencyLabel.Text = tostring(value)
+	end)
+end
+]]></ProtectedString>
 						<int64 name="SourceAssetId">-1</int64>
 						<BinaryString name="Tags"></BinaryString>
 						<UniqueId name="UniqueId">0df4e162b34d89c106f246c80000cc2e</UniqueId>
@@ -2104,6 +2102,85 @@ end)]]></ProtectedString>
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">0df4e162b34d89c106f246c800000342</UniqueId>
 		</Properties>
+		<Item class="Folder" referent="RBX934D93ABAEB54F85BB7333204A61611D">
+			<Properties>
+				<BinaryString name="AttributesSerialize"></BinaryString>
+				<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+				<bool name="DefinesCapabilities">false</bool>
+				<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+				<string name="Name">currency</string>
+				<int64 name="SourceAssetId">-1</int64>
+				<BinaryString name="Tags"></BinaryString>
+				<UniqueId name="UniqueId">0df4e162b34d89c106f246c800011e6f</UniqueId>
+			</Properties>
+			<Item class="ModuleScript" referent="RBXB1632B96CFD44021B40518DF7EE8AF94">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">Currency</string>
+					<string name="ScriptGuid">{3A9CA3A6-2AEA-4C7F-A187-D7EF4FCF907C}</string>
+					<ProtectedString name="Source"><![CDATA[local Currency = {}
+
+local CurrencyValues = {
+	Gold = 0,
+	Silver = 0,
+	Bronze = 0
+}
+
+
+function Currency:new()
+	local currency = {}
+	self = self or currency
+	self.__index = self
+	setmetatable(currency, self)
+	
+	currency.values = {}
+	
+	for k, v in pairs(CurrencyValues) do
+		currency.values[k] = v
+	end
+	
+	return currency
+end
+
+return Currency
+]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">0df4e162b34d89c106f246c800011e6c</UniqueId>
+				</Properties>
+			</Item>
+			<Item class="ModuleScript" referent="RBX1CDCC3E94B6545DC8B7A6F1099A09AF2">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">CurrencyHandler</string>
+					<string name="ScriptGuid">{81824D73-4A87-4DEC-A822-A2582A75FD8C}</string>
+					<ProtectedString name="Source"><![CDATA[local currency = require(script.Parent.Currency)
+local CurrencyHandler = {}
+
+function CurrencyHandler.createNewForPlayer()
+	return currency:new()
+end
+
+function CurrencyHandler.getCurrencyKeys()
+	return currency:new().values
+end
+
+return CurrencyHandler
+]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">0df4e162b34d89c106f246c8000125dd</UniqueId>
+				</Properties>
+			</Item>
+		</Item>
 	</Item>
 	<Item class="ServerScriptService" referent="RBXC6B5C082F53B421CAA0F71B7F60C7370">
 		<Properties>
@@ -2117,24 +2194,6 @@ end)]]></ProtectedString>
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">0df4e162b34d89c106f246c800000343</UniqueId>
 		</Properties>
-		<Item class="Script" referent="RBX4C58890708E449EE95BEA245F7AF2D24">
-			<Properties>
-				<BinaryString name="AttributesSerialize"></BinaryString>
-				<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
-				<bool name="DefinesCapabilities">false</bool>
-				<bool name="Disabled">false</bool>
-				<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
-				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">HelloWorld</string>
-				<token name="RunContext">0</token>
-				<string name="ScriptGuid">{2D6C944B-A53D-4DEC-80BE-64341E48B904}</string>
-				<ProtectedString name="Source"><![CDATA[print("Hello world!")
-]]></ProtectedString>
-				<int64 name="SourceAssetId">-1</int64>
-				<BinaryString name="Tags"></BinaryString>
-				<UniqueId name="UniqueId">0df4e162b34d89c106f246c8000068f6</UniqueId>
-			</Properties>
-		</Item>
 		<Item class="Script" referent="RBX3FD1544C3796454584388AD96262572F">
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
@@ -2143,21 +2202,21 @@ end)]]></ProtectedString>
 				<bool name="Disabled">false</bool>
 				<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 				<Content name="LinkedSource"><null></null></Content>
-				<string name="Name">CurrencyHandler</string>
+				<string name="Name">StartupScript</string>
 				<token name="RunContext">0</token>
 				<string name="ScriptGuid">{BB6DD709-BFD6-4B33-BE20-1BBD82D748DC}</string>
-				<ProtectedString name="Source"><![CDATA[local defaultCurrencies = {
-	["gold"] = 0,
-	["silver"] = 0,
-	["bronze"] = 0
-}
+				<ProtectedString name="Source"><![CDATA[local Currency = require(game.ReplicatedStorage.currency.Currency)
+local CurrencyHandler = require(game.ReplicatedStorage.currency.CurrencyHandler)
 
 function addCurrencyToPlayer(player)
-	for k, v in pairs(defaultCurrencies) do
+	local currency = CurrencyHandler:createNewForPlayer()
+	print(currency.values)
+	for k, v in pairs(currency.values) do
 		-- player:SetAttribute(k, v)
 		local currencyValue = Instance.new("NumberValue", player)
 		currencyValue.Name = k
 		currencyValue.Value = v
+		print('Added ' .. k .. ':' .. v .. ' to player: ' .. player.Name)
 	end
 	-- player:SetAttribute("Currencies", defaultCurrencies)
 	-- local currencyValues = Instance.new("Part", player);
@@ -2174,9 +2233,9 @@ function playerAdded(player)
 		-- player.gold.Value = player.gold.Value + 1
 		-- player.silver.Value = player.silver.Value + 1
 		-- player.bronze.Value = player.bronze.Value + 1
-		player.gold.Value = player.gold.Value + 1
-		player.silver.Value = player.silver.Value + 1
-		player.bronze.Value = player.bronze.Value + 1
+		player.Gold.Value = player.Gold.Value + 1
+		player.Silver.Value = player.Silver.Value + 1
+		player.Bronze.Value = player.Bronze.Value + 1
 	end
 end
 

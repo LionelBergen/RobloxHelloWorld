@@ -3819,7 +3819,7 @@ end
 function PartHandler:clonePart(partToClone)
 	local newPart = partToClone:Clone()
 	newPart.Parent = partToClone.Parent
-	self:setLocation(partToClone)
+	self:setLocation(newPart, partToClone)
 	
 	return newPart
 end
@@ -3974,7 +3974,7 @@ function spawnOrbsRandomly(numberOfOrbsToSpawn, collisionFunction)
 	for k, v in pairs(workspace.Currency:GetChildren()) do
 		local currencyOrb = { 
 			weight = v:GetAttribute('Weight'),
-			value = v
+			value = PartHandler:clonePart(v)
 		}
 		table.insert(currencyOrbs, currencyOrb)
 	end
@@ -4005,6 +4005,11 @@ function partCollision(part, otherPart)
 			PartHandler:setLocation(part)
 			part:SetAttribute('TouchedRecently', true)
 			CurrencyHandler:addAmountToPlayer(player, part:GetAttribute('Value'))
+			
+			task.delay(30, function()
+				-- TODO: don't do this. Reset the orb randomly and then set location randomly again. Create class to do this above.
+				spawnOrbsRandomly(1, partCollision)
+			end)
 		end
 	end
 end

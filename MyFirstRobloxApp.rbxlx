@@ -2015,18 +2015,18 @@ AAAAAAAkQA==]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>8.39638519</X>
-					<Y>51.4284515</Y>
-					<Z>10.5846691</Z>
-					<R00>0.973168671</R00>
-					<R01>-0.139121071</R01>
-					<R02>0.183270663</R02>
-					<R10>7.4505806e-09</R10>
-					<R11>0.796506882</R11>
-					<R12>0.604629636</R12>
-					<R20>-0.230093032</R20>
-					<R21>-0.588406622</R21>
-					<R22>0.775135458</R22>
+					<X>-2.95001793</X>
+					<Y>53.9505196</Y>
+					<Z>-18.3335953</Z>
+					<R00>0.95474267</R00>
+					<R01>-0.155424401</R01>
+					<R02>0.253593504</R02>
+					<R10>-0</R10>
+					<R11>0.852607012</R11>
+					<R12>0.522552609</R12>
+					<R20>-0.297433019</R20>
+					<R21>-0.498903275</R21>
+					<R22>0.814020336</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -2035,9 +2035,9 @@ AAAAAAAkQA==]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>8.02984047</X>
-					<Y>50.2191811</Y>
-					<Z>9.03438377</Z>
+					<X>-3.45720482</X>
+					<Y>52.9054146</Y>
+					<Z>-19.9616356</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -2818,6 +2818,11 @@ local player: Player = game.Players.LocalPlayer
 local currencyValues = CurrencyUtil.getCurrencyKeys()
 
 for k, _ in pairs(currencyValues) do
+	if player[k].Value then
+		-- Fire right away as the server has already set the values
+		script.Parent[k .. 'MedalImage'].CurrencyLabel.Text = tostring(player[k].Value)
+	end
+
 	player:WaitForChild(k).Changed:Connect(function(value)
 		script.Parent[k .. 'MedalImage'].CurrencyLabel.Text = tostring(value)
 	end)
@@ -3678,9 +3683,9 @@ end
 					<ProtectedString name="Source"><![CDATA[local Currency = {}
 
 type Currency = {
-	Gold: number,
+	Bronze: number,
 	Silver: number,
-	Bronze: number
+	Gold: number
 }
 
 function Currency:new(bronze: number?, silver: number?, gold: number?): Currency
@@ -3749,6 +3754,13 @@ return Currency
 					<ProtectedString name="Source"><![CDATA[local Currency = require(script.Parent.Currency)
 local CurrencyUtil = {}
 
+function addNewKeyToPlayer(player: Player, propName: string, propValue: number)
+	local currencyValue = Instance.new("NumberValue", player)
+	currencyValue.Name = propName
+	currencyValue.Value = propValue
+	print('Added ' .. currencyValue.Name .. ':' .. currencyValue.Value .. ' to player: ' .. player.Name)
+end
+
 function CurrencyUtil.createNewForPlayer(): Currency
 	return Currency:new()
 end
@@ -3759,12 +3771,10 @@ end
 
 function CurrencyUtil.addCurrencyToPlayer(player: Player, currency: Currency)
 	local currency: Currency = currency or CurrencyUtil.createNewForPlayer()
-	for k, v in pairs(currency:getValues()) do
-		local currencyValue = Instance.new("NumberValue", player)
-		currencyValue.Name = k
-		currencyValue.Value = v
-		print('Added ' .. k .. ':' .. v .. ' to player: ' .. player.Name)
-	end
+
+	addNewKeyToPlayer(player, "Bronze", currency.Bronze)
+	addNewKeyToPlayer(player, "Silver", currency.Silver)
+	addNewKeyToPlayer(player, "Gold", currency.Gold)
 end
 
 function CurrencyUtil:addAmountToPlayer(player: Player, amount: number)
@@ -4069,8 +4079,10 @@ return MathUtil
 				<token name="RunContext">0</token>
 				<string name="ScriptGuid">{BB6DD709-BFD6-4B33-BE20-1BBD82D748DC}</string>
 				<ProtectedString name="Source"><![CDATA[local CurrencyUtil: CurrencyUtil = require(game.ReplicatedStorage.Currency.CurrencyUtil)
+local Currency: Currency = require(game.ReplicatedStorage.Currency.Currency)
 local GameOptions : GameOptions = require(game.ServerScriptService.Game.GameOptions)
 local GameLogic : GameLogic = require(game.ServerScriptService.Game.GameLogic)
+local DatabaseUtil: DatabaseUtil = require(game.ServerScriptService.Database.DatabaseUtil)
 
 local deadSpawnOrb: MeshPart = workspace.DeadBox.DeadSpawnOrb
 local spawnOrbRoom: MeshPart = workspace.MoneyRoom
@@ -4083,11 +4095,26 @@ local gameOptions: GameOptions = GameOptions:new(deadSpawnOrb, spawnOrbRoom, num
 GameLogic = GameLogic:new(gameOptions)
 
 function playerAdded(player: Player)
-	CurrencyUtil.addCurrencyToPlayer(player)
+	local data = DatabaseUtil:GetForPlayer(player)
+	if not data then
+		CurrencyUtil.addCurrencyToPlayer(player)
+		DatabaseUtil:SaveDataForPlayer(player)
+	else
+		local currency = Currency:new(data[1], data[2], data[3])
+		CurrencyUtil.addCurrencyToPlayer(player, currency)
+	end
 end
 
 game.Players.PlayerAdded:Connect(playerAdded)
-GameLogic:begin()]]></ProtectedString>
+GameLogic:begin()
+
+
+while true do
+	for _, player in game.Players:GetPlayers() do
+		DatabaseUtil:SaveDataForPlayer(player)
+	end
+	wait(2)
+end]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0df4e162b34d89c106f246c80000c4c7</UniqueId>
@@ -4231,6 +4258,61 @@ return GameOptions
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a7160000531c</UniqueId>
+				</Properties>
+			</Item>
+		</Item>
+		<Item class="Folder" referent="RBX52E1F7A282CF4D849BE3C1679B3B243D">
+			<Properties>
+				<BinaryString name="AttributesSerialize"></BinaryString>
+				<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+				<bool name="DefinesCapabilities">false</bool>
+				<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+				<string name="Name">Database</string>
+				<int64 name="SourceAssetId">-1</int64>
+				<BinaryString name="Tags"></BinaryString>
+				<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600005c8a</UniqueId>
+			</Properties>
+			<Item class="ModuleScript" referent="RBX72702E6EC86C49A984DE22BE5A354D80">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">DatabaseUtil</string>
+					<string name="ScriptGuid">{2EB5BEFD-88E0-4BE1-9347-2E7DD030B7C4}</string>
+					<ProtectedString name="Source"><![CDATA[local DatastoreService = game:GetService("DataStoreService")
+local CURRENCY_DATABASE_NAME = "Currency"
+local CurrencyDatabase = DatastoreService:GetDataStore(CURRENCY_DATABASE_NAME)
+
+local DatabaseUtil = {}
+
+function DatabaseUtil:GetForPlayer(player: Player)
+	local data
+	local _, _= pcall(function() 
+		data = CurrencyDatabase:GetAsync(player.UserId)
+	end)
+	
+	return data
+end
+
+function DatabaseUtil:SaveDataForPlayer(player: Player)
+	local tableData = {
+		player.Bronze.Value,
+		player.Silver.Value,
+		player.Gold.Value
+	}
+
+	local success, errorMessage = pcall(CurrencyDatabase.SetAsync, CurrencyDatabase, player.UserId, tableData)
+
+	print(success and "Data has been saved for userId: " .. player.UserId or "Database Error: " .. errorMessage)
+end
+
+return DatabaseUtil
+]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600005c8b</UniqueId>
 				</Properties>
 			</Item>
 		</Item>

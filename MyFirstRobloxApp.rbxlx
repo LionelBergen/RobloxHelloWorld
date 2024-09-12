@@ -1481,8 +1481,8 @@ zNLfaoZA///+//PAj5CH]]></BinaryString>
 				<Properties>
 					<SharedString name="AeroMeshData">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString>
 					<bool name="Anchored">true</bool>
-					<BinaryString name="AttributesSerialize"><![CDATA[AwAAAA8AAABUb3VjaGVkUmVjZW50bHkDAAUAAABWYWx1ZQYAAAAAAADwPwYAAABXZWlnaHQG
-AAAAAAAATkA=]]></BinaryString>
+					<BinaryString name="AttributesSerialize"><![CDATA[AwAAAAsAAABMYXN0VG91Y2hlZAUAAAAABQAAAFZhbHVlBgAAAAAAAPA/BgAAAFdlaWdodAYA
+AAAAAABOQA==]]></BinaryString>
 					<float name="BackParamA">-0.5</float>
 					<float name="BackParamB">0.5</float>
 					<token name="BackSurface">0</token>
@@ -1617,8 +1617,8 @@ AAAAAAAATkA=]]></BinaryString>
 				<Properties>
 					<SharedString name="AeroMeshData">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString>
 					<bool name="Anchored">true</bool>
-					<BinaryString name="AttributesSerialize"><![CDATA[AwAAAA8AAABUb3VjaGVkUmVjZW50bHkDAAUAAABWYWx1ZQYAAAAAAAAkQAYAAABXZWlnaHQG
-AAAAAAAANEA=]]></BinaryString>
+					<BinaryString name="AttributesSerialize"><![CDATA[AwAAAAsAAABMYXN0VG91Y2hlZAUAAAAABQAAAFZhbHVlBgAAAAAAACRABgAAAFdlaWdodAYA
+AAAAAAA0QA==]]></BinaryString>
 					<float name="BackParamA">-0.5</float>
 					<float name="BackParamB">0.5</float>
 					<token name="BackSurface">0</token>
@@ -1753,8 +1753,8 @@ AAAAAAAANEA=]]></BinaryString>
 				<Properties>
 					<SharedString name="AeroMeshData">yuZpQdnvvUBOTYh1jqZ2cA==</SharedString>
 					<bool name="Anchored">true</bool>
-					<BinaryString name="AttributesSerialize"><![CDATA[AwAAAA8AAABUb3VjaGVkUmVjZW50bHkDAAUAAABWYWx1ZQYAAAAAAABZQAYAAABXZWlnaHQG
-AAAAAAAAJEA=]]></BinaryString>
+					<BinaryString name="AttributesSerialize"><![CDATA[AwAAAAsAAABMYXN0VG91Y2hlZAUAAAAABQAAAFZhbHVlBgAAAAAAAFlABgAAAFdlaWdodAYA
+AAAAAAAkQA==]]></BinaryString>
 					<float name="BackParamA">-0.5</float>
 					<float name="BackParamB">0.5</float>
 					<token name="BackSurface">0</token>
@@ -2015,18 +2015,18 @@ AAAAAAAAJEA=]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>2.70449638</X>
-					<Y>48.8331451</Y>
-					<Z>31.0851746</Z>
-					<R00>0.991890192</R00>
-					<R01>-0.0779010504</R01>
-					<R02>0.100425482</R02>
-					<R10>-0</R10>
-					<R11>0.790143311</R11>
-					<R12>0.612922072</R12>
-					<R20>-0.1270978</R20>
-					<R21>-0.607951403</R21>
-					<R22>0.783735394</R22>
+					<X>8.39638519</X>
+					<Y>51.4284515</Y>
+					<Z>10.5846691</Z>
+					<R00>0.973168671</R00>
+					<R01>-0.139121071</R01>
+					<R02>0.183270663</R02>
+					<R10>7.4505806e-09</R10>
+					<R11>0.796506882</R11>
+					<R12>0.604629636</R12>
+					<R20>-0.230093032</R20>
+					<R21>-0.588406622</R21>
+					<R22>0.775135458</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -2035,9 +2035,9 @@ AAAAAAAAJEA=]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>2.50364399</X>
-					<Y>47.6072922</Y>
-					<Z>29.5176926</Z>
+					<X>8.02984047</X>
+					<Y>50.2191811</Y>
+					<Z>9.03438377</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -2812,10 +2812,10 @@ AAAAAAAAJEA=]]></BinaryString>
 						<string name="Name">SetCurrencyDisplayScript</string>
 						<token name="RunContext">0</token>
 						<string name="ScriptGuid">{9BF8C5E2-3EC0-4C85-92C0-BBEAAD816555}</string>
-						<ProtectedString name="Source"><![CDATA[local currencyHandler = require(game.ReplicatedStorage.Currency.CurrencyHandler)
-local player = game.Players.LocalPlayer
+						<ProtectedString name="Source"><![CDATA[local CurrencyUtil: CurrencyUtil = require(game.ReplicatedStorage.Currency.CurrencyUtil)
+local player: Player = game.Players.LocalPlayer
 
-local currencyValues = currencyHandler.getCurrencyKeys()
+local currencyValues = CurrencyUtil.getCurrencyKeys()
 
 for k, _ in pairs(currencyValues) do
 	player:WaitForChild(k).Changed:Connect(function(value)
@@ -3744,21 +3744,21 @@ return Currency
 					<bool name="DefinesCapabilities">false</bool>
 					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">CurrencyHandler</string>
+					<string name="Name">CurrencyUtil</string>
 					<string name="ScriptGuid">{81824D73-4A87-4DEC-A822-A2582A75FD8C}</string>
 					<ProtectedString name="Source"><![CDATA[local Currency = require(script.Parent.Currency)
-local CurrencyHandler = {}
+local CurrencyUtil = {}
 
-function CurrencyHandler.createNewForPlayer(): Currency
+function CurrencyUtil.createNewForPlayer(): Currency
 	return Currency:new()
 end
 
-function CurrencyHandler.getCurrencyKeys()
+function CurrencyUtil.getCurrencyKeys()
 	return Currency:new():getValues()
 end
 
-function CurrencyHandler.addCurrencyToPlayer(player: Player, currency: Currency)
-	local currency: Currency = currency or CurrencyHandler.createNewForPlayer()
+function CurrencyUtil.addCurrencyToPlayer(player: Player, currency: Currency)
+	local currency: Currency = currency or CurrencyUtil.createNewForPlayer()
 	for k, v in pairs(currency:getValues()) do
 		local currencyValue = Instance.new("NumberValue", player)
 		currencyValue.Name = k
@@ -3767,7 +3767,7 @@ function CurrencyHandler.addCurrencyToPlayer(player: Player, currency: Currency)
 	end
 end
 
-function CurrencyHandler:addAmountToPlayer(player: Player, amount: number)
+function CurrencyUtil:addAmountToPlayer(player: Player, amount: number)
 	local currency: Currency = Currency:new(player.Bronze.Value, player.Silver.Value, player.Gold.Value)
 	currency:addAmount(amount)
 	player.Bronze.Value = currency.Bronze
@@ -3775,7 +3775,7 @@ function CurrencyHandler:addAmountToPlayer(player: Player, amount: number)
 	player.Gold.Value = currency.Gold
 end
 
-return CurrencyHandler
+return CurrencyUtil
 ]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
@@ -3801,27 +3801,27 @@ return CurrencyHandler
 					<bool name="DefinesCapabilities">false</bool>
 					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
 					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">PartHandler</string>
+					<string name="Name">PartUtil</string>
 					<string name="ScriptGuid">{97AB0FCC-7BF7-468A-BF64-9158FD2C067E}</string>
-					<ProtectedString name="Source"><![CDATA[local PartHandler = {}
+					<ProtectedString name="Source"><![CDATA[local PartUtil = {}
 
-type PartHandler = {
+type PartUtil = {
 	BasePart: MeshPart
 }
 
 -- 
-function PartHandler:new(BasePart: MeshPart): PartHandler
-	local partHandler: PartHandler = {}
-	self = self or partHandler
+function PartUtil:new(BasePart: MeshPart): PartUtil
+	local partUtil: PartUtil = {}
+	self = self or partUtil
 	self.__index = self
-	setmetatable(partHandler, self)
+	setmetatable(partUtil, self)
 
-	partHandler.BasePart = BasePart
+	partUtil.BasePart = BasePart
 
-	return partHandler
+	return partUtil
 end
 
-function PartHandler:clonePart(partToClone: MeshPart): MeshPart
+function PartUtil:clonePart(partToClone: MeshPart): MeshPart
 	local newPart: MeshPart = partToClone:Clone()
 	newPart.Parent = partToClone.Parent
 	self:setLocation(newPart, partToClone)
@@ -3829,12 +3829,12 @@ function PartHandler:clonePart(partToClone: MeshPart): MeshPart
 	return newPart
 end
 
-function PartHandler:setLocation(partToMove: MeshPart, partToGetLocationFrom: MeshPart)
+function PartUtil:setLocation(partToMove: MeshPart, partToGetLocationFrom: MeshPart?)
 	local partToGetLocationFrom: MeshPart = partToGetLocationFrom or self.BasePart
 	partToMove:PivotTo(CFrame.new(partToGetLocationFrom.Position.x, partToGetLocationFrom.Position.Y, partToGetLocationFrom.Position.Z))
 end
 
-return PartHandler
+return PartUtil
 ]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
@@ -3851,33 +3851,35 @@ return PartHandler
 					<string name="Name">PartSpawner</string>
 					<string name="ScriptGuid">{FED8A2BB-FBDE-4227-922A-8632A5CF444C}</string>
 					<ProtectedString name="Source"><![CDATA[local MathUtil = require(game.ReplicatedStorage.Util.MathUtil)
-local PartHandler = require(game.ReplicatedStorage.Parts.PartHandler)
+local PartUtil = require(game.ReplicatedStorage.Parts.PartUtil)
+local Bounds = require(game.ReplicatedStorage.Parts.Modal.Bounds)
 
 local PartSpawner = {}
 
 type PartSpawner = {
-	SpawnBounds: MeshPart,
+	SpawnBounds: Bounds,
 	NumberOfParts: number
 }
 
-function PartSpawner:new(spawnBoundsPart: MeshPart, numberOfParts: number): PartSpawner
+function PartSpawner:new(spawnBounds: MeshPart, numberOfParts: number): PartSpawner
 	local partSpawner: PartSpawner = {}
 	self = self or partSpawner
 	self.__index = self
 	setmetatable(partSpawner, self)
 
-	partSpawner.SpawnBounds = spawnBoundsPart
+	partSpawner.SpawnBounds = Bounds:new(spawnBounds)
 	PartSpawner.NumberOfParts = numberOfParts
 
 	return partSpawner
 end
 
-function PartSpawner:spawnPartsRandomly(partsWithWeights: Array<MeshPart>, collisionFunction: Function)
-	local parts: Array<{weight: number, value: MeshPart}> = {}
+function PartSpawner:spawnPartsRandomly(partsWithWeights: {MeshPart}): {MeshPart}
+	local partsCreated: {MeshPart} = {}
+	local parts: {{weight: number, value: MeshPart}} = {}
 	for k, v in pairs(partsWithWeights) do
 		local weightWithValue: {weight: number, value: MeshPart} = {
 			weight = v:GetAttribute('Weight'),
-			value = PartHandler:clonePart(v)
+			value = PartUtil:clonePart(v)
 		}
 		table.insert(parts, weightWithValue)
 	end
@@ -3886,26 +3888,24 @@ function PartSpawner:spawnPartsRandomly(partsWithWeights: Array<MeshPart>, colli
 
 	for k, v in pairs(randomParts) do
 		local newPart: MeshPart = self:createAtRandomLocation(v)
-		newPart.Touched:Connect(function(otherPart)
-			collisionFunction(newPart, otherPart)
-		end)
+		table.insert(partsCreated, newPart)
 	end
+	
+	return partsCreated
+end
+
+function PartSpawner:movePartRandomLocation(part: MeshPart): {MeshPart}
+	local x = MathUtil:randomNumber(self.SpawnBounds.minX, self.SpawnBounds.maxX)
+	local z = MathUtil:randomNumber(self.SpawnBounds.minZ, self.SpawnBounds.maxZ)
+	local y = self.SpawnBounds.y + 3
+
+	part:PivotTo(CFrame.new(x, y, z))
 end
 
 function PartSpawner:createAtRandomLocation(partToCopy: MeshPart): MeshPart
-	local newPart: MeshPart = PartHandler:clonePart(partToCopy)
+	local newPart: MeshPart = PartUtil:clonePart(partToCopy)
 
-	local minX = self.SpawnBounds.Position.X - (self.SpawnBounds.Size.X / 2)
-	local maxX = self.SpawnBounds.Position.X + (self.SpawnBounds.Size.X / 2)
-
-	local minZ = self.SpawnBounds.Position.Z - (self.SpawnBounds.Size.Z / 2)
-	local maxZ = self.SpawnBounds.Position.Z + (self.SpawnBounds.Size.Z / 2)
-
-	local x = MathUtil:randomNumber(minX, maxX)
-	local z = MathUtil:randomNumber(minZ, maxZ)
-	local y = self.SpawnBounds.Position.Y + 3
-
-	newPart:PivotTo(CFrame.new(x, y, z))
+	self:movePartRandomLocation(newPart)
 
 	return newPart
 end
@@ -3916,6 +3916,59 @@ return PartSpawner
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600004faf</UniqueId>
 				</Properties>
+			</Item>
+			<Item class="Folder" referent="RBX50A76995460F4801B364D8B6001E5E6A">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<string name="Name">Modal</string>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a716000054ee</UniqueId>
+				</Properties>
+				<Item class="ModuleScript" referent="RBX62C1C00B0A134662A821E19CCB31EC89">
+					<Properties>
+						<BinaryString name="AttributesSerialize"></BinaryString>
+						<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+						<bool name="DefinesCapabilities">false</bool>
+						<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">Bounds</string>
+						<string name="ScriptGuid">{3C60B48A-AC21-412E-922E-A1C9D1BA94A1}</string>
+						<ProtectedString name="Source"><![CDATA[local Bounds = {}
+
+type Bounds = {
+	minX: number,
+	maxX: number,
+	minZ: number,
+	maxZ: number,
+	y: number
+}
+
+function Bounds:new(part: MeshPart): Bounds
+	local minX = part.Position.X - (part.Size.X / 2)
+	local maxX = part.Position.X + (part.Size.X / 2)
+	local minZ = part.Position.Z - (part.Size.Z / 2)
+	local maxZ = part.Position.Z + (part.Size.Z / 2)
+
+	return {
+		minX = minX,
+		maxX = maxX,
+		minZ = minZ,
+		maxZ = maxZ,
+		y = part.Position.Y
+	}
+end
+
+return Bounds
+]]></ProtectedString>
+						<int64 name="SourceAssetId">-1</int64>
+						<BinaryString name="Tags"></BinaryString>
+						<UniqueId name="UniqueId">65aec3befaea0ccc06f3a716000054ef</UniqueId>
+					</Properties>
+				</Item>
 			</Item>
 		</Item>
 		<Item class="Folder" referent="RBXE07CD149771C4A6187966E1D21431C01">
@@ -3941,7 +3994,7 @@ return PartSpawner
 					<ProtectedString name="Source"><![CDATA[local MathUtil = {}
 
 --- Wrapper for math.random() in case we want to change in the future
-local function generateRandomNumber(m, n)
+local function generateRandomNumber(m: number, n: number): number
 	if m and n then
 		return math.random(m, n)
 	elseif m then
@@ -3960,20 +4013,19 @@ local function chooseValue(chosenValue, tableContainingWeights)
 	end
 end
 
---- Generates a random number and increments iteration
-function MathUtil:randomNumber(m, n)
+function MathUtil:randomNumber(m, n): number
 	return generateRandomNumber(m, n)
 end
 
-function MathUtil:distribute(amountToDistribute, tableContainingWeights)
+function MathUtil:distribute(amountToDistribute: number, tableContainingWeights: any)
 	local distributedValues = {}
 	for i=1, amountToDistribute do
 		local totalWeight = 0;
 		for i, v in pairs(tableContainingWeights) do
 			totalWeight += tableContainingWeights[i].weight
 		end
-		local chosenValue = generateRandomNumber(0, totalWeight)
-		local chosenTableValue = chooseValue(chosenValue, tableContainingWeights)
+		local randomValue = generateRandomNumber(0, totalWeight)
+		local chosenTableValue = chooseValue(randomValue, tableContainingWeights)
 		if chosenTableValue then
 			table.insert(distributedValues, chosenTableValue)
 		end
@@ -4016,72 +4068,171 @@ return MathUtil
 				<string name="Name">StartupScript</string>
 				<token name="RunContext">0</token>
 				<string name="ScriptGuid">{BB6DD709-BFD6-4B33-BE20-1BBD82D748DC}</string>
-				<ProtectedString name="Source"><![CDATA[local Currency: Currency = require(game.ReplicatedStorage.Currency.Currency)
-local CurrencyHandler: CurrencyHandler = require(game.ReplicatedStorage.Currency.CurrencyHandler)
-local PartHandler: PartHandler = require(game.ReplicatedStorage.Parts.PartHandler)
-local PartSpawner: PartSpawner = require(game.ReplicatedStorage.Parts.PartSpawner)
-local MathUtil: MathUtil = require(game.ReplicatedStorage.Util.MathUtil)
+				<ProtectedString name="Source"><![CDATA[local CurrencyUtil: CurrencyUtil = require(game.ReplicatedStorage.Currency.CurrencyUtil)
+local GameOptions : GameOptions = require(game.ServerScriptService.Game.GameOptions)
+local GameLogic : GameLogic = require(game.ServerScriptService.Game.GameLogic)
 
 local deadSpawnOrb: MeshPart = workspace.DeadBox.DeadSpawnOrb
 local spawnOrbRoom: MeshPart = workspace.MoneyRoom
 local numberOfOrbsToSpawn: number = 30
+local spawnOrbsEvery = 30
 
-PartHandler = PartHandler:new(deadSpawnOrb)
-PartSpawner = PartSpawner:new(spawnOrbRoom, numberOfOrbsToSpawn)
+local currencyParts: {MeshPart} = workspace.Currency:GetChildren()
+local gameOptions: GameOptions = GameOptions:new(deadSpawnOrb, spawnOrbRoom, numberOfOrbsToSpawn, spawnOrbsEvery, currencyParts)
 
-local currencyParts: Array<MeshPart> = workspace.Currency:GetChildren()
-
---function spawnOrbsRandomly(numberOfOrbsToSpawn, collisionFunction)
---	local currencyOrbs = {}
---	for k, v in pairs(workspace.Currency:GetChildren()) do
---		local currencyOrb = {
---			weight = v:GetAttribute('Weight'),
---			value = PartHandler:clonePart(v)
---		}
---		table.insert(currencyOrbs, currencyOrb)
---	end
-
---	local randomOrbs = MathUtil:distribute(numberOfOrbsToSpawn, currencyOrbs)
-
---	for k, v in pairs(randomOrbs) do
---		local newPart = PartHandler:createAtRandomLocation(v, spawnOrbRoom)
---		newPart.Touched:Connect(function(otherPart)
---			collisionFunction(newPart, otherPart)
---		end)
---	end
---end
-
----- Reset locations
---PartHandler:setLocation(bronzeOrb, deadSpawnOrb)
+GameLogic = GameLogic:new(gameOptions)
 
 function playerAdded(player: Player)
-	CurrencyHandler.addCurrencyToPlayer(player)
-end
-
-function partCollision(part, otherPart)
-	local characterModel = otherPart:FindFirstAncestorOfClass("Model")
-	if characterModel then
-		local player = game.Players:GetPlayerFromCharacter(characterModel)
-		local wasTouchedRecently = part:GetAttribute('TouchedRecently')
-		if player and not wasTouchedRecently then
-			PartHandler:setLocation(part)
-			part:SetAttribute('TouchedRecently', true)
-			CurrencyHandler:addAmountToPlayer(player, part:GetAttribute('Value'))
-			
-			task.delay(30, function()
-				-- TODO: don't do this. Reset the orb randomly and then set location randomly again. Create class to do this above.
-				-- spawnOrbsRandomly(1, partCollision)
-			end)
-		end
-	end
+	CurrencyUtil.addCurrencyToPlayer(player)
 end
 
 game.Players.PlayerAdded:Connect(playerAdded)
-PartSpawner:spawnPartsRandomly(currencyParts, partCollision)]]></ProtectedString>
+GameLogic:begin()]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0df4e162b34d89c106f246c80000c4c7</UniqueId>
 			</Properties>
+		</Item>
+		<Item class="Folder" referent="RBXEA3D2B6E60944D998C750068837257C4">
+			<Properties>
+				<BinaryString name="AttributesSerialize"></BinaryString>
+				<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+				<bool name="DefinesCapabilities">false</bool>
+				<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+				<string name="Name">Game</string>
+				<int64 name="SourceAssetId">-1</int64>
+				<BinaryString name="Tags"></BinaryString>
+				<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600005312</UniqueId>
+			</Properties>
+			<Item class="ModuleScript" referent="RBX7EC40118499947C78C30BD03555F0A23">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">GameLogic</string>
+					<string name="ScriptGuid">{096C24B6-D3EA-4201-94DF-FAB67FBD1B2F}</string>
+					<ProtectedString name="Source"><![CDATA[local GameOptions = require(game.ServerScriptService.Game.GameOptions)
+local PartUtil: PartUtil = require(game.ReplicatedStorage.Parts.PartUtil)
+local PartSpawner = require(game.ReplicatedStorage.Parts.PartSpawner)
+local CurrencyUtil = require(game.ReplicatedStorage.Currency.CurrencyUtil)
+
+local GameLogic = {}
+
+type GameLogic = {
+	Options: GameOptions,
+	PartUtil: PartUtil,
+	PartSpawner: PartSpawner,
+	SpawnedParts: {MeshPart},
+	CurrentTick: number
+}
+
+function getPlayerFromPart(part: MeshPart): Player?
+	local characterModal = part:FindFirstAncestorOfClass("Model")
+	if characterModal then
+		return game.Players:GetPlayerFromCharacter(characterModal)
+	end
+
+	return nil
+end
+
+function GameLogic:handleCurrencyOrbTouched(player: Player, orb: MeshPart)
+	orb:SetAttribute('LastTouched', self.CurrentTick)
+	self.PartUtil:setLocation(orb)
+	CurrencyUtil:addAmountToPlayer(player, orb:GetAttribute('Value'))
+	
+	task.delay(self.Options.spawnOrbsEvery, function()
+		orb:SetAttribute('LastTouched', 0)
+		self.PartSpawner:movePartRandomLocation(orb)
+	end)
+end
+
+function GameLogic:new(options: GameOptions): GameLogic
+	local gameLogic: GameLogic = {}
+	self = self or gameLogic
+	self.__index = self
+	setmetatable(gameLogic, self)
+
+	gameLogic.Options = options
+	gameLogic.PartUtil = PartUtil:new(options.DeadSpawnOrb)
+	gameLogic.PartSpawner = PartSpawner:new(options.SpawnOrbRoom, options.numberOfOrbsToSpawn)
+	gameLogic.CurrentTick = 1
+
+	return gameLogic
+end
+
+function GameLogic:spawnParts()
+	local parts: {MeshPart} = self.PartSpawner:spawnPartsRandomly(self.Options.CurrencyParts)
+	
+	for _, v in pairs(parts) do
+		v.Touched:Connect(function(otherPart)
+			self:CurrencyOrbCollisionWithPlayer(v, otherPart)
+		end)
+	end
+	
+	self.SpawnedParts = parts
+end
+
+function GameLogic:CurrencyOrbCollisionWithPlayer(currencyOrb: MeshPart, collidedWithPart: MeshPart)
+	local player = getPlayerFromPart(collidedWithPart)
+	if player then
+		local touchedRecently = (currencyOrb:GetAttribute('LastTouched') ~= 0)
+		if player and not touchedRecently then
+			self:handleCurrencyOrbTouched(player, currencyOrb)
+		end
+	end
+end
+
+function GameLogic:begin()
+	self:spawnParts()
+end
+
+return GameLogic
+]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a7160000530f</UniqueId>
+				</Properties>
+			</Item>
+			<Item class="ModuleScript" referent="RBX27921358C9734198A9B4E04B04754A31">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">GameOptions</string>
+					<string name="ScriptGuid">{98C38928-07A8-4906-A2EA-A2681CE6B43A}</string>
+					<ProtectedString name="Source"><![CDATA[local GameOptions = {}
+
+type GameOptions = {
+	DeadSpawnOrb: MeshPart,
+	SpawnOrbRoom: MeshPart,
+	numberOfOrbsToSpawn: number,
+	spawnOrbsEvery: number,
+	CurrencyParts: Array<MeshPart>
+}
+
+function GameOptions:new(deadSpawnOrb: MeshPart, spawnOrbRoom: MeshPart, numberOfOrbsToSpawn: number, spawnOrbsEvery: number, currencyParts: {MeshPart}): GameOptions
+	local gameOptions: GameOptions = {
+		DeadSpawnOrb = deadSpawnOrb,
+		SpawnOrbRoom = spawnOrbRoom,
+		numberOfOrbsToSpawn = numberOfOrbsToSpawn,
+		spawnOrbsEvery = spawnOrbsEvery,
+		CurrencyParts = currencyParts
+	}
+	
+	return gameOptions
+end
+
+return GameOptions
+]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a7160000531c</UniqueId>
+				</Properties>
+			</Item>
 		</Item>
 	</Item>
 	<Item class="ServerStorage" referent="RBX9DA50822457442D09D5E8551A2631E24">

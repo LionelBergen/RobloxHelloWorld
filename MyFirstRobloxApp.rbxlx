@@ -2015,18 +2015,18 @@ AAAAAAAkQA==]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-2.95001793</X>
-					<Y>53.9505196</Y>
-					<Z>-18.3335953</Z>
-					<R00>0.95474267</R00>
-					<R01>-0.155424401</R01>
-					<R02>0.253593504</R02>
-					<R10>-0</R10>
-					<R11>0.852607012</R11>
-					<R12>0.522552609</R12>
-					<R20>-0.297433019</R20>
-					<R21>-0.498903275</R21>
-					<R22>0.814020336</R22>
+					<X>-40.1356125</X>
+					<Y>54.8408127</Y>
+					<Z>35.4908867</Z>
+					<R00>0.971076787</R00>
+					<R01>0.156018764</R01>
+					<R02>-0.180743113</R02>
+					<R10>1.49011594e-08</R10>
+					<R11>0.756983697</R11>
+					<R12>0.653433859</R12>
+					<R20>0.23876752</R20>
+					<R21>-0.634534478</R21>
+					<R22>0.735089242</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -2035,9 +2035,9 @@ AAAAAAAkQA==]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>-3.45720482</X>
-					<Y>52.9054146</Y>
-					<Z>-19.9616356</Z>
+					<X>-39.7741089</X>
+					<Y>53.5338821</Y>
+					<Z>34.0206375</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -4087,7 +4087,7 @@ local DatabaseUtil: DatabaseUtil = require(game.ServerScriptService.Database.Dat
 local deadSpawnOrb: MeshPart = workspace.DeadBox.DeadSpawnOrb
 local spawnOrbRoom: MeshPart = workspace.MoneyRoom
 local numberOfOrbsToSpawn: number = 30
-local spawnOrbsEvery = 30
+local spawnOrbsEvery: number = 30
 
 local currencyParts: {MeshPart} = workspace.Currency:GetChildren()
 local gameOptions: GameOptions = GameOptions:new(deadSpawnOrb, spawnOrbRoom, numberOfOrbsToSpawn, spawnOrbsEvery, currencyParts)
@@ -4098,7 +4098,6 @@ function playerAdded(player: Player)
 	local data = DatabaseUtil:GetForPlayer(player)
 	if not data then
 		CurrencyUtil.addCurrencyToPlayer(player)
-		DatabaseUtil:SaveDataForPlayer(player)
 	else
 		local currency = Currency:new(data[1], data[2], data[3])
 		CurrencyUtil.addCurrencyToPlayer(player, currency)
@@ -4108,13 +4107,13 @@ end
 game.Players.PlayerAdded:Connect(playerAdded)
 GameLogic:begin()
 
-
 while true do
 	for _, player in game.Players:GetPlayers() do
 		DatabaseUtil:SaveDataForPlayer(player)
 	end
 	wait(2)
-end]]></ProtectedString>
+end
+]]></ProtectedString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 				<UniqueId name="UniqueId">0df4e162b34d89c106f246c80000c4c7</UniqueId>

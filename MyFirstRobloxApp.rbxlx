@@ -2015,18 +2015,18 @@ AAAAAAAkQA==]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>4.9146204</X>
-					<Y>20.8881645</Y>
-					<Z>-5.07593441</Z>
-					<R00>-0.99422121</R00>
-					<R01>-0.0653523728</R01>
-					<R02>0.0851664543</R02>
-					<R10>-3.7252903e-09</R10>
-					<R11>0.793345034</R11>
-					<R12>0.608772278</R12>
-					<R20>-0.107351094</R20>
-					<R21>0.605254292</R21>
-					<R22>-0.788760424</R22>
+					<X>-12.7575283</X>
+					<Y>15.761137</Y>
+					<Z>5.34950542</Z>
+					<R00>-0.176418826</R00>
+					<R01>0.523070395</R01>
+					<R02>-0.833830893</R02>
+					<R10>-0</R10>
+					<R11>0.847117841</R11>
+					<R12>0.53140533</R12>
+					<R20>0.984315276</R20>
+					<R21>0.0937499031</R21>
+					<R22>-0.149447516</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -2035,9 +2035,9 @@ AAAAAAAkQA==]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>4.74428749</X>
-					<Y>19.67062</Y>
-					<Z>-3.49841356</Z>
+					<X>-11.0898781</X>
+					<Y>14.6983337</Y>
+					<Z>5.6483984</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -2103,7 +2103,7 @@ AAAAAAAkQA==]]></BinaryString>
 					<Z>0</Z>
 				</Vector3>
 				<token name="ModelStreamingMode">0</token>
-				<string name="Name">Tool</string>
+				<string name="Name">BatTool</string>
 				<bool name="NeedsPivotMigration">false</bool>
 				<Ref name="PrimaryPart">null</Ref>
 				<bool name="RequiresHandle">true</bool>
@@ -2263,6 +2263,31 @@ AAAAAAAkQA==]]></BinaryString>
 						<Y>0.5</Y>
 						<Z>0.5</Z>
 					</Vector3>
+				</Properties>
+			</Item>
+			<Item class="Script" referent="RBXA0F023C63FC4463B9D51E176F5E08078">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<bool name="Disabled">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<Content name="LinkedSource"><null></null></Content>
+					<string name="Name">BatScript</string>
+					<token name="RunContext">0</token>
+					<string name="ScriptGuid">{7B67B709-1663-4E47-9D0E-E824CDAA00AD}</string>
+					<ProtectedString name="Source"><![CDATA[local WeaponLogic : WeaponLogic = require(game.ServerScriptService.Game.Weapon.WeaponLogic)
+
+local tool = script.Parent
+
+local function onTouch(otherPart)
+	WeaponLogic:handleTouch(otherPart, tool)
+end
+
+tool.Handle.Touched:Connect(onTouch)]]></ProtectedString>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">2dd27010ac5c20fb070bd67600011440</UniqueId>
 				</Properties>
 			</Item>
 		</Item>
@@ -4362,13 +4387,18 @@ type GameLogic = {
 	CurrentTick: number
 }
 
-function getPlayerFromPart(part: MeshPart): Player?
+function GameLogic:getPlayerFromPart(part: MeshPart): Player?
 	local characterModal = part:FindFirstAncestorOfClass("Model")
 	if characterModal then
 		return game.Players:GetPlayerFromCharacter(characterModal)
 	end
 
 	return nil
+end
+
+function GameLogic:getHumanoidFromPart(part: MeshPart)
+	local player = part.Parent:FindFirstChild("Humanoid")
+	return player and player.Parent or player
 end
 
 function GameLogic:handleCurrencyOrbTouched(player: Player, orb: MeshPart)
@@ -4409,7 +4439,7 @@ function GameLogic:spawnParts()
 end
 
 function GameLogic:CurrencyOrbCollisionWithPlayer(currencyOrb: MeshPart, collidedWithPart: MeshPart)
-	local player = getPlayerFromPart(collidedWithPart)
+	local player = GameLogic:getPlayerFromPart(collidedWithPart)
 	if player then
 		local touchedRecently = (currencyOrb:GetAttribute('LastTouched') ~= 0)
 		if player and not touchedRecently then
@@ -4466,6 +4496,48 @@ return GameOptions
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">65aec3befaea0ccc06f3a7160000531c</UniqueId>
 				</Properties>
+			</Item>
+			<Item class="Folder" referent="RBX91036D7F9B7B43F49C9F3EB4535470E5">
+				<Properties>
+					<BinaryString name="AttributesSerialize"></BinaryString>
+					<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+					<bool name="DefinesCapabilities">false</bool>
+					<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+					<string name="Name">Weapon</string>
+					<int64 name="SourceAssetId">-1</int64>
+					<BinaryString name="Tags"></BinaryString>
+					<UniqueId name="UniqueId">2dd27010ac5c20fb070bd67600011458</UniqueId>
+				</Properties>
+				<Item class="ModuleScript" referent="RBXAED4A3699C244E818FB77B9EC99D832F">
+					<Properties>
+						<BinaryString name="AttributesSerialize"></BinaryString>
+						<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+						<bool name="DefinesCapabilities">false</bool>
+						<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+						<Content name="LinkedSource"><null></null></Content>
+						<string name="Name">WeaponLogic</string>
+						<string name="ScriptGuid">{06CA316B-D479-4A87-A89A-26B35D86772D}</string>
+						<ProtectedString name="Source"><![CDATA[local GameLogic : GameLogic = require(game.ServerScriptService.Game.GameLogic)
+local WeaponLogic = {}
+
+function WeaponLogic:handleTouch(collidedWithPart: MeshPart, parentTool: Tool): GameLogic
+	local player = GameLogic:getHumanoidFromPart(collidedWithPart)
+
+	-- if collided with player but not the player thats holding the object 
+	if player and player ~= parentTool.Parent then
+		print(parentTool.Parent)
+		print(player)
+		print('touched')
+	end
+end
+
+return WeaponLogic
+]]></ProtectedString>
+						<int64 name="SourceAssetId">-1</int64>
+						<BinaryString name="Tags"></BinaryString>
+						<UniqueId name="UniqueId">2dd27010ac5c20fb070bd67600011459</UniqueId>
+					</Properties>
+				</Item>
 			</Item>
 		</Item>
 		<Item class="Folder" referent="RBX4C703AC6B00D451AABBA5D6F23555350">

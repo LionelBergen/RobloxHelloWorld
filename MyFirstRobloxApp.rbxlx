@@ -2015,18 +2015,18 @@ AAAAAAAkQA==]]></BinaryString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>-40.1356125</X>
-					<Y>54.8408127</Y>
-					<Z>35.4908867</Z>
-					<R00>0.971076787</R00>
-					<R01>0.156018764</R01>
-					<R02>-0.180743113</R02>
-					<R10>1.49011594e-08</R10>
-					<R11>0.756983697</R11>
-					<R12>0.653433859</R12>
-					<R20>0.23876752</R20>
-					<R21>-0.634534478</R21>
-					<R22>0.735089242</R22>
+					<X>-28.6866226</X>
+					<Y>79.2428207</Y>
+					<Z>71.6197662</Z>
+					<R00>0.99822551</R00>
+					<R01>0.039613612</R01>
+					<R02>-0.0444606096</R02>
+					<R10>-1.86264515e-09</R10>
+					<R11>0.746632814</R11>
+					<R12>0.665236473</R12>
+					<R20>0.0595481656</R20>
+					<R21>-0.664056003</R21>
+					<R22>0.745307863</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -2035,9 +2035,9 @@ AAAAAAAkQA==]]></BinaryString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>-39.7741089</X>
-					<Y>53.5338821</Y>
-					<Z>34.0206375</Z>
+					<X>-28.5976982</X>
+					<Y>77.9123001</Y>
+					<Z>70.129097</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
@@ -2125,6 +2125,18 @@ AAAAAAAkQA==]]></BinaryString>
 			<int64 name="SourceAssetId">-1</int64>
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">0df4e162b34d89c106f246c800000304</UniqueId>
+		</Properties>
+	</Item>
+	<Item class="TimerService" referent="RBX4BC815FDFC8E4C6EA46887ACDAD06598">
+		<Properties>
+			<BinaryString name="AttributesSerialize"></BinaryString>
+			<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
+			<bool name="DefinesCapabilities">false</bool>
+			<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
+			<string name="Name">TimerService</string>
+			<int64 name="SourceAssetId">-1</int64>
+			<BinaryString name="Tags"></BinaryString>
+			<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600000329</UniqueId>
 		</Properties>
 	</Item>
 	<Item class="Players" referent="RBX6DEE7ACF7BF24145B792215E1CB84CA6">
@@ -3524,18 +3536,6 @@ end
 			<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600000328</UniqueId>
 		</Properties>
 	</Item>
-	<Item class="TimerService" referent="RBX4BC815FDFC8E4C6EA46887ACDAD06598">
-		<Properties>
-			<BinaryString name="AttributesSerialize"></BinaryString>
-			<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
-			<bool name="DefinesCapabilities">false</bool>
-			<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
-			<string name="Name">TimerService</string>
-			<int64 name="SourceAssetId">-1</int64>
-			<BinaryString name="Tags"></BinaryString>
-			<UniqueId name="UniqueId">65aec3befaea0ccc06f3a71600000329</UniqueId>
-		</Properties>
-	</Item>
 	<Item class="CookiesService" referent="RBX30F313B780894C17A2AF3471855CE6D2">
 		<Properties>
 			<BinaryString name="AttributesSerialize"></BinaryString>
@@ -4339,18 +4339,6 @@ return DatabaseUtil
 			<int64 name="SourceAssetId">-1</int64>
 			<BinaryString name="Tags"></BinaryString>
 			<UniqueId name="UniqueId">0df4e162b34d89c106f246c800000361</UniqueId>
-		</Properties>
-	</Item>
-	<Item class="GuidRegistryService" referent="RBXD7864C265E504789A8CB51683DD89D6E">
-		<Properties>
-			<BinaryString name="AttributesSerialize"></BinaryString>
-			<SecurityCapabilities name="Capabilities">0</SecurityCapabilities>
-			<bool name="DefinesCapabilities">false</bool>
-			<UniqueId name="HistoryId">00000000000000000000000000000000</UniqueId>
-			<string name="Name">GuidRegistryService</string>
-			<int64 name="SourceAssetId">-1</int64>
-			<BinaryString name="Tags"></BinaryString>
-			<UniqueId name="UniqueId">65aec3befaea0ccc06f3a7160000036d</UniqueId>
 		</Properties>
 	</Item>
 	<Item class="Lighting" referent="RBX3C608CD328084BA59E3D1BC4ABFA2030">

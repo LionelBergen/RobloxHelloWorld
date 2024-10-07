@@ -2241,7 +2241,16 @@ local function onTouch(otherPart)
 	batLogic:handleTouch(otherPart, tool)
 end
 
-tool.Handle.Touched:Connect(onTouch)]]></ProtectedString>
+local function slash()
+	local str = Instance.new("StringValue")
+	str.Name = "toolanim"
+	str.Value = "Slash"
+	str.Parent = tool
+	print "slash"	
+end
+
+tool.Handle.Touched:Connect(onTouch)
+tool.Activated:Connect(slash)]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
 					<BinaryString name="Tags"></BinaryString>
 					<UniqueId name="UniqueId">2dd27010ac5c20fb070bd67600011440</UniqueId>
@@ -2252,18 +2261,18 @@ tool.Handle.Touched:Connect(onTouch)]]></ProtectedString>
 			<Properties>
 				<BinaryString name="AttributesSerialize"></BinaryString>
 				<CoordinateFrame name="CFrame">
-					<X>13.5135527</X>
-					<Y>22.0546474</Y>
-					<Z>-7.62955284</Z>
-					<R00>-0.839044213</R00>
-					<R01>-0.370365918</R01>
-					<R02>0.398539692</R02>
+					<X>-10.2946806</X>
+					<Y>14.8900185</Y>
+					<Z>-8.05139256</Z>
+					<R00>-0.94754827</R00>
+					<R01>0.172675908</R01>
+					<R02>-0.268952489</R02>
 					<R10>-0</R10>
-					<R11>0.732524633</R11>
-					<R12>0.680740654</R12>
-					<R20>-0.544063151</R20>
-					<R21>0.571171522</R21>
-					<R22>-0.614620566</R22>
+					<R11>0.841494501</R11>
+					<R12>0.540265739</R12>
+					<R20>0.31961292</R20>
+					<R21>0.511927843</R21>
+					<R22>-0.797356546</R22>
 				</CoordinateFrame>
 				<Ref name="CameraSubject">null</Ref>
 				<token name="CameraType">0</token>
@@ -2272,9 +2281,9 @@ tool.Handle.Touched:Connect(onTouch)]]></ProtectedString>
 				<float name="FieldOfView">70</float>
 				<token name="FieldOfViewMode">0</token>
 				<CoordinateFrame name="Focus">
-					<X>12.7164669</X>
-					<Y>20.6931553</Y>
-					<Z>-6.40030193</Z>
+					<X>-9.75677109</X>
+					<Y>13.8094778</Y>
+					<Z>-6.45666599</Z>
 					<R00>1</R00>
 					<R01>0</R01>
 					<R02>0</R02>
